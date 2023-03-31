@@ -20,7 +20,6 @@ def index():
         file = form.file.data
         filename = secure_filename(file.filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        print(path)
         start_time = datetime.now()
         file.save(path)
         elpased_time = (datetime.now() - start_time).total_seconds()
@@ -30,4 +29,4 @@ def index():
 
 @app.route('/file/<filename>')
 def download(filename):
-    return send_from_directory(directory=app.config['UPLOAD_FOLDER'], path=filename)
+    return send_from_directory(directory=os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), path=filename)
