@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form class="col-sm-4" method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    <h3 class="text-center mb-4">Upload the file</h3>
+    <div class="mb-3">
+        {% if form.file.errors %}
+          <p class="text-danger mb-1 mt-0">
+            {% for e in form.file.errors %}
+            {{ e }}<br>
+            {% endfor %}
+          </p>
+          {{ form.file(class="form-control border-danger", id="formFile") }}
+        {% else %}
+        {{ form.file(class="form-control", id="formFile") }}
+        {% endif %}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock content %}
